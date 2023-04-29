@@ -1,0 +1,14 @@
+{
+  "tasks": [
+    {
+      "type": "shell",
+      "label": "CMake: test",
+      "command": "${workspaceFolder}/build/tests/version_accessor_tests",
+      "problemMatcher": [],
+      "group": {
+        "kind": "test", 
+        "isDefault": true
+      }
+    }
+  ]
+}
