@@ -3,9 +3,17 @@ project(hello_actions)
 
 option(BUILD_TESTS OFF)
 
-set(VERSION_MAJOR 0)
-set(VERSION_MINOR 0)
-set(VERSION_PATCH 1)
+if (NOT DEFINED VERSION_MAJOR)
+  set(VERSION_MAJOR 0)
+endif()
+
+if (NOT DEFINED VERSION_MINOR)
+  set(VERSION_MINOR 0)
+endif()
+
+if (NOT DEFINED VERSION_PATCH)
+  set(VERSION_PATCH 0)
+endif()
 
 configure_file(build_info.h.in build_info.h)
 
