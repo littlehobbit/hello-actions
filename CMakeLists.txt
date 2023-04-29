@@ -38,4 +38,10 @@ if (${BUILD_TESTS})
   add_subdirectory(tests)
 endif()
 
-# TODO: cpack for deb packages
+set(CPACK_GENERATOR DEB)
+set(CPACK_PACKAGE_VERSION_MAJOR "${VERSION_MAJOR}")
+set(CPACK_PACKAGE_VERSION_MINOR "${VERSION_MINOR}")
+set(CPACK_PACKAGE_VERSION_PATCH "${VERSION_PATCH}")
+set(CPACK_PACKAGE_CONTACT gataullinruslandev@gmain.com)
+include(CPack)
+
