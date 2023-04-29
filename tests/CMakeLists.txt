@@ -19,8 +19,6 @@ target_link_libraries(
 )
 
 target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_BINARY_DIR})
-
-target_compile_features(${PROJECT_NAME} PRIVATE cxx_std_17)
 set_target_properties(${PROJECT_NAME} PROPERTIES
     CXX_STANDARD 17
     CXX_STANDARD_REQUIRED YES
@@ -28,5 +26,4 @@ set_target_properties(${PROJECT_NAME} PROPERTIES
 )
 
 gtest_discover_tests(${PROJECT_NAME})
-add_test(NAME version_accessor_tests COMMAND version_accessor_tests)
 
