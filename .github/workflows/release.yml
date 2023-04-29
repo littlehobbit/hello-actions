@@ -45,14 +45,14 @@ jobs:
         draft: false
         prerelease: false
 
-      - name: Upload Assets
-        working-directory: ${{ github.workspace }}/build
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: hello_actions-${{ steps.get_version.outputs.version }}-Linux.deb
-          asset_name: hello_actions-${{ steps.get_version.outputs.version }}-Linux.deb
-          asset_content_type: application/vnd.debian.binary-package
+    - name: Upload Assets
+      working-directory: ${{ github.workspace }}/build
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: hello_actions-${{ steps.get_version.outputs.version }}-Linux.deb
+        asset_name: hello_actions-${{ steps.get_version.outputs.version }}-Linux.deb
+        asset_content_type: application/vnd.debian.binary-package
 
