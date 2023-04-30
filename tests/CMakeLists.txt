@@ -2,9 +2,7 @@ cmake_minimum_required(VERSION 3.10)
 
 project(version_accessor_tests)
 
-find_package(GTest REQUIRED)
-include(GoogleTest)
-
+find_package(Catch2 REQUIRED)
 
 add_executable(
   ${PROJECT_NAME}
@@ -13,8 +11,7 @@ add_executable(
 
 target_link_libraries(
   ${PROJECT_NAME} PRIVATE
-  GTest::GTest
-  GTest::Main
+  Catch2::Catch2WithMain
   version_accessor
 )
 
@@ -25,5 +22,6 @@ set_target_properties(${PROJECT_NAME} PROPERTIES
     CXX_EXTENSIONS NO
 )
 
-gtest_discover_tests(${PROJECT_NAME})
+include(Catch)
+catch_discover_tests(${PROJECT_NAME})
 
