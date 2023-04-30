@@ -19,6 +19,7 @@ jobs:
       run: sudo apt update && sudo apt install -y cmake g++ make libgtest-dev libgmock-dev
 
     - name: Get Version
+      id: get_version
       uses: battila7/get-version-action@v2.2.1
 
     - name: Configure CMake
