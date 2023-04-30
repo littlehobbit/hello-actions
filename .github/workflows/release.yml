@@ -44,10 +44,10 @@ jobs:
       run: cpack -C ${{env.BUILD_TYPE}}
 
     - name: Get Branch
-       run: |
-         raw=$(git branch -r --contains ${{ github.ref }})
-         branch=${raw/origin\/}
-         echo "BRANCH=$branch" >> $GITHUB_ENV
+      run: |
+        raw=$(git branch -r --contains ${{ github.ref }})
+        branch=${raw/origin\/}
+        echo "BRANCH=$branch" >> $GITHUB_ENV
 
     - name: Create Release
       id: create_release
