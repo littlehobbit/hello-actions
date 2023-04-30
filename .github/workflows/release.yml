@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - 'release/**'
+      - '*'
+    tags:
+      - '*'
 
 env:
   BUILD_TYPE: Release
@@ -24,7 +27,11 @@ jobs:
       uses: battila7/get-version-action@v2.2.1
 
     - name: Configure CMake
-      run: cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DBUILD_TESTS=ON -DVERSION_MAJOR=${{ steps.get_version.outputs.major }} -DVERSION_MINOR=${{ steps.get_version.outputs.minor }} -DVERSION_PATCH=${{ steps.get_version.outputs.patch }}
+      env:  
+        major: ${{steps.get_version.outputs.major}}
+        minor: ${{steps.get_version.outputs.minor}}
+        patch: ${{steps.get_version.outputs.patch}}
+      run: cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DBUILD_TESTS=ON -DVERSION_MAJOR=${{env.major}} -DVERSION_MINOR=${{env.minor}} -DVERSION_PATCH=${{env.patch}}
 
     - name: Build
       run: cmake --build ${{github.workspace}}/build --config ${{env.BUILD_TYPE}} --parallel
@@ -42,9 +49,11 @@ jobs:
       uses: actions/create-release@v1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        BRANCH_NAME: ${{ github.head_ref || github.ref_name }} 
+        TAG: ${{env.BRANCH_NAME}}/${{ steps.get_version.outputs.version }}
       with:
-        tag_name: ${{ steps.get_version.outputs.version }}
-        release_name: Release ${{ steps.get_version.outputs.version }}
+        tag_name: ${{env.TAG}}
+        release_name: Release ${{env.TAG}}
         draft: false
         prerelease: false
 
