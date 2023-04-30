@@ -50,10 +50,9 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         BRANCH_NAME: ${{ github.head_ref || github.ref_name }} 
-        TAG: ${{env.BRANCH_NAME}}/${{ steps.get_version.outputs.version }}
       with:
-        tag_name: ${{env.TAG}}
-        release_name: Release ${{env.TAG}}
+        tag_name: ${{ steps.get_version.outputs.version }}
+        release_name: Release ${{env.BRANCH_NAME}}/${{steps.get_version.outputs.version}}
         draft: false
         prerelease: false
 
